@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="app">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="angular.js"></script>
+<script src="ngStorage.js"></script>
+<script src="login.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="screen.css" />
+<title>Forum</title>
+</head>
+<body id="babout">
+<div ng-controller="loginCtrl">
+ 	<form>
+ 		<table class="centerTable">
+ 		<input type="text" id="searchBar" style="display:none">
+ 			<tbody>
+ 				<tr>
+					<td><label for="username">Username :</label> </td>
+					<td><input type="text" id="username" name="username" ng-model="username"> </input> </td>
+				</tr>
+				<tr>
+					<td><label for="password">Password: </label> </td>
+					<td><input type="password" id="pass" name="pass" ng-model="pass"> </input> </td>
+				</tr>
+				<tr>
+					<td><label for="fname">First Name: </label> </td>
+					<td><input type="text" id="fname" name="fname" ng-model="fname"> </input> </td>
+				</tr>
+				<tr>	 
+					<td><label for="lname">Last Name: </label> </td>
+					<td><input type="text" id="lname" name="lname" ng-model="lname"> </input> </td>
+				</tr>	
+ 				<tr>
+					<td><label for=phone>Phone Number: </label> </td>
+					<td><input type="text" id="phone" name="phone" ng-model="phone"> </input> </td>
+				</tr>	
+				 <tr>
+					<td><label for="email">Email: </label> </td>
+					<td><input type="text" id="email" name="email" ng-model="email"> </input> </td>
+				</tr>
+	 			</tr>
+					<td><button ng-click="register(username,pass,fname,lname,phone,email)">Sign Up</button></td>
+					<td><button ng-click="back()">Back</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	
+</div>
+	<input type="text" id="searchBar" style="display:none">
+	
+</body>
+</html>

@@ -1,0 +1,109 @@
+<html ng-app="app">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="angular.js"></script>
+<script src="ngStorage.js"></script>
+<script src="login.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="screen.css" />
+<title>Forum</title>
+</head>
+<body id="babout">
+	<div ng-controller="loginCtrl" class="header">
+		<div ng-hide="logged">
+			<button ng-click="registrationCalled()">Sign Up</button>
+			<button ng-click="loginCalled()">Sign In</button>
+		</div>
+		<div ng-show="logged">
+			<button ng-click="logout()">Logout</button>
+		</div>
+	
+
+
+	<div id="navigation">
+		<ul>
+			<li id="lhome"><a href="/aaa/start/index.html">Home</a></li>
+			<li id="lproducts"><a href="#01">Profile</a></li>
+			<li id="lsolutions"><a href="#02">Messages</a></li>
+			<li id="lmysterious"><a href="#03">Following</a></li>
+			<li id="labout"><a href="#03" ng-hide="regular" nc-click="newSub()">Add SubForum</a></li>
+		</ul>
+	</div>
+	
+	<div ng-show="addingNewSub">
+			<form>
+				<table>
+					<tbody>
+						<tr>
+							<td><label for="name">SubForum name:</label></td>
+							<td><input type="text" name="sfname" ng-model="sfname">
+								</input></td>
+						</tr>
+
+						<tr>
+							<td><label for="desc">Description:</label></td>
+							<td><input type="text" name="sfdesc" ng-model="sfdesc">
+								</input></td>
+						</tr>
+
+						<tr>
+							<td><label for="sfrules">Rules:</label></td>
+							<td><input type="text" name="sfrules" ng-model="sfrules">
+								</input></td>
+						</tr>
+
+						<tr>
+							<td><label for="sfmods">Moderators:</label></td>
+							<td><input type="text" name="sfmods" ng-model="sfmods">
+								</input></td>
+						</tr>
+						</tr>
+						<td><button ng-click="newSubForum(sfname,sfdesc,sfrules,sfmods)">Save</button></td>
+						<td><button ng-click="cancelNewSF()">Cancel</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	
+	
+	
+	
+	<span>&nbsp;</span>
+	
+	<div class="subs">
+
+		<table id="pocetnasubs">
+			<thead>
+				<tr>
+					<th id="th1subs"><h4>Topics</h4></th>
+					<th><h4>Options</h4></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td >
+						<dl >
+							<dt>
+							{{topics.length}}
+								
+							</dt>
+						</dl>
+					</td>
+					<td id="td2subs" >
+						<div ng-show="logged">
+						
+								<button ng-click="newTopic()">New Topic</button>
+							<div  ng-disabled="regular">
+								<button ng-click="newSub()" ng-hide="regular">New SubForum</button>
+								<button ng-click="deleteSub()" ng-hide="regular">Delete SubForum</button>
+							</div>
+							
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

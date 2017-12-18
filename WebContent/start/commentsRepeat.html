@@ -1,0 +1,27 @@
+<div id="categoryTree">
+<br>
+   		 <p>
+			<a href="#{{com.id}}">COMMENT #{{$index+1}}</a><a href=""
+			ng-click="editCom(com, top)"
+			ng-if="user.username === com.author || admin || moderators.Contain(user.username)">(Edit)</a>
+		</p>
+			<div>
+				<p>Author:<p ng-hide={{com.deleted}}> {{com.author}}</p><p>Created:{{com.dateOfCreation}},  Edited: {{com.edited}}</p></p>
+				<p>Content:</p>
+				<p ng-hide={{com.deleted}}>
+					<b>{{com.content}}</b>
+				</p>
+				<p>
+					 <a href="" ng-click="saveComm(com)">SAVE/UNSAVE</a> <a href="" ng-click="likeCom(top,com)">LIKE</a> ({{com.likedBy.length}}) 
+					 <a href="" ng-click="dislikeCom(top,com)">DISLIKE</a>({{com.dislikedBy.length}})
+						<a href="" ng-click="addingComment(com)">COMMENT</a>
+				</p>
+				
+    <ol ng-if="com.childCommentIds.length>0">
+        <li ng-repeat="com in com.childCommentIds" ng-include="'commentsRepeat.html'">           
+        </li>
+    </ol>
+</div>	
+					
+	
+					

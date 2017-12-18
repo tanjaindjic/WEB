@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="app">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script src="angular.js"></script>
+<script src="ngStorage.js"></script>
+<script src="login.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="screen.css" />
+<title>Forum</title>
+</head>
+<body>
+<div ng-controller="loginCtrl">
+
+		<form>
+			<table class="centerTable">
+			<input type="text" id="searchBar" style="display:none">
+				<tbody>
+					<tr>
+						<td><label for="username">Username :</label></td>
+						<td><input type="text" id="username" name="username" ng-model="username"></td>
+						</input>
+					</tr>
+					<tr>
+
+						<td><label for="password">Password: </label></td>
+						<td><input type="password" id="pass" name="pass" ng-model="pass"></input></td>
+					</tr>
+					<tr>
+						<td><button ng-click="login(username,pass)">Login</button></td>
+						<td><button ng-click="back()">Back</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+
+	</div>
+
+	
+</body>
+</html>

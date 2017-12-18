@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div ng-show="following">
+			<table id="following">
+				<thead>
+					<tr>
+						<th class="th1" style="width: 100%"></th>
+						<th><h4>Following</h4></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<dl ng-repeat="sub in followedSubs" class="shadow">
+								<dt>
+									<a class="sublink" href="" ng-click="subOptionsFollowing(sub.name)">{{sub.name}}</a>
+
+									<div style="display: none" id="{{sub.name}} following" ng-show="logged">
+										<ul class="suboptions" class="suboptions">
+											<li><a class="topiclink" href=""
+												ng-click="followSF(sub)">Follow/Unfollow</a></li>
+											<li ng-hide="regular"><a class="topiclink" href=""
+												ng-click="editSub(sub)">Edit SubForum</a></li>
+											<li><a class="topiclink" href=""
+												ng-click="newTopic(sub)">Add new Topic</a></li>
+											<li ng-hide="regular"><a class="topiclink" href=""
+												ng-click="editMods(sub)">Edit Moderators</a></li>
+											<li ng-hide="regular"><a class="topiclink" href=""
+												ng-click="deleteSub(sub)">Delete SubForum</a></li>
+
+										</ul>
+									</div>
+
+									<p>Description: {{sub.description}}</p>
+									<p>Rules: {{sub.rules.toString()}}</p>
+									<p>Moderators: {{sub.moderators.toString()}}</p>
+									<p>Author: {{sub.mainModerator}}</p>
+									<a class="topiclink" href="" ng-click="subOptions2Following(sub.name)">Click
+										to expand topics</a>
+									<div id="{{sub.name}} followingtopics" style="display: none">
+										<dl class="topics" ng-repeat="top in sub.topics">
+											<dt>
+												<a class="topiclink" href="" ng-click="topOptionsFollowing(top.id)">{{top.name}}</a>
+
+
+												<div style="display: none" id="{{top.id + following}}" ng-show="logged">
+													<ul class="suboptions" class="suboptions">
+														<li><a class="topiclink" href=""
+															ng-click="saveTop(top)">Save/Unsave</a></li>
+														<li ng-hide="regular"><a class="topiclink" href=""
+															ng-click="editTop(top)">Edit Topic</a></li>
+														<li><a class="topiclink" href=""
+															ng-click="newCommment(top)">Add new comment</a></li>
+														<li ng-hide="regular"><a class="topiclink" href=""
+															ng-click="moveTop(top)">Move topic</a></li>
+														<li ng-hide="regular"><a class="topiclink" href=""
+															ng-click="editTMods(top)">Edit Moderators</a></li>
+														<li ng-hide="regular"><a class="topiclink" href=""
+															ng-click="deleteTop(top)">Delete Topic</a></li>
+
+													</ul>
+												</div>
+												<p>Content: {{top.content}}</p>
+											</dt>
+										</dl>
+									</div>
+								</dt>
+							</dl>
+						</td>
+						<td class="td2" style="display: none">
+							<div ng-show="editingSub">
+								<form>
+									<table class="centerTable">
+										<tbody>
+											<tr>
+												<td colspan="2"><h4>Edit SubForum</h4></td>
+											</tr>
+
+											<tr>
+												<td><label for="desc">New Description:</label></td>
+												<td><textarea name="sfdesc" ng-model="sfeditdesc"
+														class="textarea"></textarea></td>
+											</tr>
+
+											<tr>
+												<td><label for="sfrules">New Rules:</label></td>
+												<td><textarea name="sfrules" ng-model="sfeditrules"
+														class="textarea"></textarea></td>
+											</tr>
+
+											<tr>
+												<td><label for="sfmods">Select Moderators:</label></td>
+												<td><select id="selectModsEdit" class="select"
+													name="sfeditmods" multiple>
+
+														<option ng-repeat="u in allUsers">{{u.username}}</option>
+
+
+												</select></td>
+											</tr>
+											</tr>
+											<td><button
+													ng-click="editSubForum(sfeditdesc,sfeditrules)">Save</button></td>
+											<td><button ng-click="cancelEditSF()">Cancel</button></td>
+
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+
+							<div ng-show=addingtopic>
+								<form>
+									<table class="centerTable">
+										<tbody>
+											<tr>
+												<td colspan="2"><h4>Add Topic</h4></td>
+											</tr>
+
+											<tr>
+												<td><label for="tname">Name:</label></td>
+												<td><textarea name="tname" ng-model="tname"
+														class="textarea"></textarea></td>
+											</tr>
+
+											<tr>
+												<td><label for="tcontent">Content:</label></td>
+												<td><textarea name="tcontent" ng-model="tcontent"
+														class="textarea"></textarea></td>
+											</tr>
+
+											<tr>
+												<td><label for="sfmods">Select Moderators:</label></td>
+												<td><select id="topicTypesFollowing" class="select"
+													name="ttypes">
+
+														<option value="text">Text</option>
+														<option value="image">Image</option>
+														<option value="link">Link</option>
+
+												</select></td>
+											</tr>
+											</tr>
+											<td><button ng-click="addTopicFollowing(tname,tcontent)">Save</button></td>
+											<td><button ng-click="cancelEditSF()">Cancel</button></td>
+
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+							<div ng-show="deletesf">
+								<p>Are you sure you want to delete this SubForum?</p>
+								<p>
+									<button ng-click="deleteSF()">Yes</button>
+									<button ng-click="cancelDeleteSF()">No</button>
+								</p>
+							</div>
+							<div ng-show="editmod">
+								<select id="modsFollowing" class="select" name="mods" multiple>
+									<option ng-repeat="u in optionsToSelect">{{u.username}}</option>
+								</select>
+								<p>
+									<button ng-click="saveEditModsFollowing()">Save</button>
+									<button ng-click="cancelEditMods()">Cancel</button>
+								</p>
+							</div>
+
+
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+</body>
+</html>
